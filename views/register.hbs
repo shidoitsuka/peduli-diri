@@ -1,0 +1,70 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Daftar Akun</title>
+  </head>
+  <body>
+    <div id="alert" class="hidden fixed w-64 px-6 py-3 bottom-5 right-10 rounded-lg text-white"></div>
+    <div class="bg-primary h-screen flex justify-center items-center">
+      <div class="grid grid-cols-1 gap-y-3 w-96 bg-white text-secondary rounded-lg drop-shadow-lg px-8 py-5">
+        <div class="h-16 flex items-center border-b">
+          <h1 class="text-3xl font-bold">Daftar</h1>
+        </div>
+        <span>NIK</span>
+        <input id="nik" class="rounded-lg bg-slate-200 text-slate-500 px-5 py-1" type="number" />
+        <span>Nama Lengkap</span>
+        <input id="name" class="rounded-lg bg-slate-200 text-slate-500 px-5 py-1" type="text" />
+        <button onclick="startSignUp()" class="bg-primary mt-3 rounded-lg py-2 border text-white font-bold border-primary hover:bg-secondary">Daftar</button>
+        <a class="text-slate-500 text-sm" href="/login">Sudah punya akun? Masuk</a>
+      </div>
+    </div>
+    <script src="/js/jquery.js"></script>
+    <script>
+      $(document).ready(function () {
+        if (localStorage.getItem("nik") != null) window.location.href = "/dashboard";
+      });
+      function startSignUp() {
+        const nik = $('#nik').val();
+        const name = $('#name').val();
+        if (nik.length != 16) {
+          $("#alert").removeClass("hidden").addClass("error").html("NIK tidak valid");
+          setTimeout(() => {
+            $("#alert").removeClass("error").addClass("hidden").html("");
+          }, 3000);
+          return;
+        }
+        if (nik.length == 0 || name.length == 0) {
+          $("#alert").removeClass("hidden").addClass("error").html("NIK dan Nama Lengkap harus diisi");
+          setTimeout(() => {
+            $("#alert").removeClass("error").addClass("hidden").html("");
+          }, 3000);
+          return;
+        }
+        else {
+          $.ajax({
+            url: "/api/register",
+            method: "POST",
+            data: { nik, name },
+            success: function (data) {
+              if (data.result == "success") {
+                $("#alert").removeClass("hidden").addClass("success").html(data.message);
+                setTimeout(() => {
+                  window.location.href = "/login";
+                }, 3000);
+              }
+              else {
+                $("#alert").removeClass("hidden").addClass("error").html(data.message);
+                setTimeout(() => {
+                  $("#alert").removeClass("error").addClass("hidden").html("");
+                }, 3000);
+              }
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

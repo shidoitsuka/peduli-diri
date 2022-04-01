@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.error {
+  background: #FF5577;
+}
+
+.success {
+  background: #41eb63;
+}

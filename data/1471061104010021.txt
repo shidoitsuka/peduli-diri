@@ -1,0 +1,1 @@
+{"name":"Brian","history":[{"date":"4333-12-05","time":"10:10","location":"Semarang","temp":"49"},{"date":"2022-04-01","time":"14:49","location":"Semarang Tawang","temp":"42"},{"date":"0033-02-01","time":"03:21","location":"wqe","temp":"33"}]}

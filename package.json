@@ -1,0 +1,20 @@
+{
+  "name": "ava",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "compile": "npx tailwindcss -i ./public/css/root.css -o ./public/css/main.css --watch",
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "hbs": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "tailwindcss": "^3.0.23"
+  }
+}
